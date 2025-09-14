@@ -1,0 +1,63 @@
+<%- include('../partials/navbar') %>
+<%- include('../partials/head',{pageTitle:"Sign Up"}) %>
+<div style="max-width: 500px; margin: 40px auto; padding: 32px; background: #fff; border-radius: 8px; box-shadow: 0 2px 16px rgba(0,0,0,0.08); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+  <h2 style="text-align:center; margin-bottom: 24px; color: #ff5a5f; font-family: inherit;">Sign Up</h2>
+  <form action="/signup" method="POST" style="display: flex; flex-direction: column; gap: 18px;">
+    <!-- First Name and Last Name -->
+    <%- include('../partials/error') %>
+    <div style="display: flex; gap: 12px;">
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 6px;">
+        <label for="firstName" style="font-weight: 500; font-family: inherit;">First Name</label>
+        <input type="text" id="firstName" name="firstName" required style="padding: 8px 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1em; font-family: inherit;" value="<%= oldInput && oldInput.firstName ? oldInput.firstName : '' %>">
+      </div>
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 6px;">
+        <label for="lastName" style="font-weight: 500; font-family: inherit;">Last Name</label>
+        <input type="text" id="lastName" name="lastName" required style="padding: 8px 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1em; font-family: inherit;" value="<%= oldInput && oldInput.lastName ? oldInput.lastName : '' %>">
+      </div>
+    </div>
+    
+    <!-- Email -->
+    <div style="display: flex; flex-direction: column; gap: 6px;">
+      <label for="email" style="font-weight: 500; font-family: inherit;">Email</label>
+      <input type="email" id="email" name="email" required style="padding: 8px 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1em; font-family: inherit;" value="<%= oldInput && oldInput.email ? oldInput.email : '' %>">
+    </div>
+    
+    <!-- Password and Confirm Password -->
+    <div style="display: flex; gap: 12px;">
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 6px;">
+        <label for="password" style="font-weight: 500; font-family: inherit;">Password</label>
+        <input type="password" id="password" name="password" required style="padding: 8px 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1em; font-family: inherit;" >
+      </div>
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 6px;">
+        <label for="confirmPassword" style="font-weight: 500; font-family: inherit;">Confirm Password</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" required style="padding: 8px 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1em; font-family: inherit;">
+      </div>
+    </div>
+    
+    <!-- User Type -->
+    <div style="display: flex; flex-direction: column; gap: 6px;">
+      <label for="userType" style="font-weight: 500; font-family: inherit;">User Type</label>
+      <select id="userType" name="usertype" required style="padding: 8px 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1em; font-family: inherit;">
+        <option value="">Select User Type</option>
+        <option value="guest" <%= oldInput && oldInput.usertype === 'guest' ? 'selected' : '' %>>Guest</option>
+        <option value="host" <%= oldInput && oldInput.usertype === 'host' ? 'selected' : '' %>>Host</option>
+      </select>
+    </div>
+    
+    <!-- Terms and Conditions -->
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <input type="checkbox" id="terms" name="terms" required style="width: 16px; height: 16px;">
+      <label for="terms" style="font-family: inherit; font-size: 0.9em;">
+        I agree to the <a href="/terms" style="color: #ff5a5f; text-decoration: none;">Terms and Conditions</a>
+      </label>
+    </div>
+    
+    <button type="submit" style="background: #ff5a5f; color: #fff; border: none; border-radius: 4px; padding: 10px 0; font-size: 1.1em; font-weight: bold; cursor: pointer; transition: background 0.3s; font-family: inherit;">Sign Up</button>
+  </form>
+  
+  <div style="text-align: center; margin-top: 16px; font-family: inherit;">
+    <p style="margin: 0; font-size: 0.9em; color: #666;">
+      Already have an account? <a href="/login" style="color: #ff5a5f; text-decoration: none;">Log In</a>
+    </p>
+  </div>
+</div> 

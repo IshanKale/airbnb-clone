@@ -1,0 +1,26 @@
+<%-include('../partials/head',{pageTitle:pagetitle})%>
+<%-include('../partials/navbar')%>
+<body style="background: #f5f5f5; font-family: Arial, sans-serif; margin: 0; padding: 0;">
+  <div style="max-width: 400px; margin: 60px auto; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); padding: 32px;">
+    <h2 style="text-align:center; color: #333; margin-bottom: 24px;">
+      <% if(editing){ %>
+        Edit your home's details
+      <% }else{ %>
+        Register a New Home
+      <% } %>
+    </h2>
+    <form action="/host/<%= editing ? "edit-home" : "add-home" %>" method="post" style="display: flex; flex-direction: column; gap: 14px;" enctype="multipart/form-data"> >
+      <input type="hidden" name="id" value="<%= editing ? home._id : "" %>">
+      <input type="text" value="<%= editing ? home.houseName : "" %>" name="houseName" placeholder="House name" style="padding: 10px; border-radius: 5px; border: 1px solid #ccc;" required>
+      <input type="text" value="<%= editing ? home.price : "" %>" name="price" placeholder="Price per day" style="padding: 10px; border-radius: 5px; border: 1px solid #ccc;" required>
+      <input type="text" value="<%= editing ? home.location : "" %>" name="location" placeholder="Location" style="padding: 10px; border-radius: 5px; border: 1px solid #ccc;" required>
+      <input type="text" value="<%= editing ? home.rating : "" %>" name="rating" placeholder="Rating" style="padding: 10px; border-radius: 5px; border: 1px solid #ccc;" required>
+
+      <input type="file" name="photourl" multiple  accept="image/jpg, image/jpeg, image/png"   style="padding: 10px; border-radius: 5px; border: 1px solid #ccc;" required>
+      
+      <textarea name="description" placeholder="describe your home" style="padding: 10px; border-radius: 5px; border: 1px solid #ccc; resize: vertical;"><%= editing ? home.description : "" %></textarea>
+      <input type="submit" value="<%= editing ? "Edit" : "Submit" %>" style="background: #ff5a5f; color: #fff; border: none; border-radius: 5px; padding: 12px; font-size: 1em; cursor: pointer; margin-top: 10px;">
+    </form>
+  </div>
+</body>
+</html>

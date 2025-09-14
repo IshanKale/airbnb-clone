@@ -1,0 +1,36 @@
+<%-include('../partials/head',{pageTitle:'Favourite List'})%>
+<%- include('../partials/navbar') %>
+<html>
+<body style="font-family: Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 0;">
+  <div style="max-width: 900px; margin: 0 auto; padding: 20px;">
+    <h1 style="text-align:center; color: #333;">Favourite List</h1>
+    <h2 style="color: #444; text-align:center; margin-top: 32px;">Here are your favourite homes:</h2>
+    <% if (favourites && favourites.length > 0) { %>
+      <div style="display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; align-items: stretch; min-height: 300px; margin-top: 24px;">
+        <% favourites.forEach(function(home) { %>
+          <div style="background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); padding: 16px; width: 260px; display: flex; flex-direction: column; align-items: center; margin-bottom: 24px;">
+            <img src="<%= home.photourl %>" alt="<%= home.houseName %>" style="width: 100%; height: 160px; object-fit: cover; border-radius: 8px; margin-bottom: 12px;" />
+            <h3 style="margin: 0 0 8px 0; color: #222; font-size: 1.2em;"> <%= home.houseName %> </h3>
+            <p style="margin: 4px 0; color: #666;">Location: <%= home.location %></p>
+            <p style="margin: 4px 0; color: #666;">Price: <b>₹<%= home.price %></b></p>
+            <p style="margin: 4px 0; color: #666;">Rating: <%= home.rating %> ⭐</p>
+            <div style="margin-top: 12px; display: flex; gap: 10px;">
+              <form action="/book/<%= home._id %>" method="GET" style="margin: 0;">
+                <button type="submit" style="background: #007bff; color: #fff; padding: 8px 16px; border-radius: 5px; border: none; font-size: 1em; cursor: pointer;">Book</button>
+              </form>
+              <form action="/details/<%= home._id %>" method="GET" style="margin: 0;">
+                <button type="submit" style="background: #28a745; color: #fff; padding: 8px 16px; border-radius: 5px; border: none; font-size: 1em; cursor: pointer;">Details</button>
+              </form>
+              <form action="/delete-fav/<%= home._id %>" method="post" style="margin: 0;">
+                <button type="submit" style="background: #a75528; color: #fff; padding: 8px 16px; border-radius: 5px; border: none; font-size: 1em; cursor: pointer;">Delete</button>
+              </form>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+    <% } else { %>
+      <p style="margin-top: 32px; color: #888; font-size: 1.1em; text-align:center;">No favorites added yet.</p>
+    <% } %>
+  </div>
+</body>
+</html>

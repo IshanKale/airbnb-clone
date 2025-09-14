@@ -1,0 +1,23 @@
+<%- include('../partials/navbar') %>
+
+<div style="max-width: 700px; margin: 40px auto; padding: 32px; background: #fff; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+  <% if (Home) { %>
+    <h1 style="font-size: 2.2em; color: #ff5a5f; margin-bottom: 12px;"><%= Home.houseName %></h1>
+    <div style="display: flex; gap: 32px; align-items: flex-start;">
+      <% if (Home.photourl) { %>
+        <img src="<%= Home.photourl %>" alt="<%= Home.houseName %>" style="width: 320px; height: 220px; object-fit: cover; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.07);">
+      <% } %>
+      <div>
+        <p style="font-size: 1.2em; margin: 8px 0 18px 0; color: #444;">Location: <b><%= Home.location %></b></p>
+        <p style="font-size: 1.2em; margin: 8px 0; color: #444;">Price per night: <b>₹<%= Home.price %></b></p>
+        <p style="font-size: 1.2em; margin: 8px 0; color: #444;">Rating: <b><%= Home.rating %> ⭐</b></p>
+        <p style="font-size: 1.1em; margin: 18px 0 0 0; color: #666;">Description: <span style="color: #222; font-weight: 500;"><%= Home.description %></span></p>
+        <% if(isLoggedin){ %>
+        <%- include("../partials/favourites",{homes:Home})%>
+        <% } %>
+      </div>
+    </div>
+  <% } else { %>
+    <h2>Home not found.</h2>
+  <% } %>
+</div> 
